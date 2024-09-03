@@ -1,11 +1,24 @@
+class Main implements EventListenerObject {
+    private nombre: string = "matias";
+    private users: Array<Usuario> = new Array();
 
-function SayHello(){
-    let current_value = document.getElementById("textarea_1") as HTMLInputElement;
-    let new_value = "Hello world!!!" + "\n" + current_value.value;
-    document.getElementById("textarea_1").innerHTML = new_value;
-
+    constructor() {
+        
+        this.users.push(new Usuario('mramos', '123132'));
+        let btn = this.recuperarElemento("btn");
+        
+        btn.addEventListener('click', this);
+    }
+    handleEvent(object: Event): void {
+        alert(this.nombre);
+    }
+    private recuperarElemento(id: string):HTMLInputElement {
+        return <HTMLInputElement>document.getElementById(id);
+    }
 }
-
-window.addEventListener("load",  ()=> {
+window.addEventListener('load', () => {
+    
+    let main: Main = new Main();
     
 });
+

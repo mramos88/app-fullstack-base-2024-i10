@@ -5,7 +5,10 @@
       <link type="text/css" rel="stylesheet" href="./static/css/materialize.min.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="./static/css/styles.css"  media="screen,projection"/>
       <script type="text/javascript" src="./static/js/materialize.min.js"></script>
+      <script src="js/user.js"></script>
       <script type="text/javascript" src="js/main.js"></script>
+      
+    
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
@@ -13,7 +16,7 @@
         <main>
             <!-- Navigation bar -->
             <nav style="background-color:#124580">
-                <div class="nav-wrapper">
+                <div id="xx" class="nav-wrapper">
                     <a href="#!" class="brand-logo left" style="margin-left: 15px;">Smart Home</a>
                     <ul id="nav-mobile" class="right" style="margin-right: 15px;">
                         <li><a href="#">Help</a></li>
@@ -30,7 +33,7 @@
                         <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
                     </div>
                     <div class="col s4 m4 l2 xl2">
-                        <button class="btn waves-effect waves-light button-view" onclick="SayHello();" name="hello_button">PRESS ME</button>
+                        <button id="btn" class="btn waves-effect waves-light button-view"  name="hello_button">PRESS ME</button>
                     </div>
                 </div>
             </div>	
