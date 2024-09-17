@@ -28,6 +28,12 @@ app.get('/devices/', function(req, res, next) {
             'description': 'Ventilador Habitacion', 
             'state': 1, 
             'type': 2, 
+        }, { 
+            'id': 3, 
+            'name': 'Luz Cocina 1', 
+            'description': 'Cocina', 
+            'state': 1, 
+            'type': 2, 
         },
     ]
     res.send(JSON.stringify(devices)).status(200);

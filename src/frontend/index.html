@@ -32,15 +32,39 @@
                 <br/>
                 <input id="txt" type="text" value="valor1"/>
                 <div class="row">
-                    <div class="input-field col s12 m12 l6 xl6">
+                    <div class="input-field col s12 m12 l6 xl6"  hidden id="divLogin">
                         <div class="row">
-                            <div class="col s6">6</div>
-                            <div class="col s6">6</div>
+                            <div class="input-field col s6 m6 l6 xl6">
+                                <input placeholder="JDON" id="userName" type="text">
+                                <label for="userName">Nombre de Usuario</label>
+                            </div>
+                            <div class="input-field col s6 m6 l6 xl6">
+                                <input  id="userPass" type="password">
+                                <label for="userPass">Contraseña</label>
+                            </div>
+                            <div>
+                                <p>
+                                    <label>
+                                      <input type="checkbox" id="cbRecor" />
+                                      <span>Rercordarme</span>
+                                    </label>
+                                  </p>
+                            </div>
+                            <div>
+                                <button id="btnLogin" class="btn-large waves-effect waves-light" type="button">
+                                Ingresar
+                                <i class="material-icons left">face</i>
+                                </button>
+                            </div>
                         </div>
                         <textarea id="textarea_1" class="materialize-textarea" style="height: 150px;" readonly></textarea>
                     </div>
-                    <div id="list" class="col s12 m12 l6 xl6">
-das
+                    <div class="col s12 m12 l6 xl6">
+                        <ul  id="list" class="collection">
+                          
+                            
+                          
+                        </ul>
                     </div>
                     
                 </div>
