@@ -11,6 +11,8 @@ class Main implements EventListenerObject {
         btnBuscar.addEventListener('click', this);
         let btnLogin = this.recuperarElemento("btnLogin");
         btnLogin.addEventListener('click', this);
+        let btnPost = this.recuperarElemento("btnPost");
+        btnPost.addEventListener('click', this);
     }
     handleEvent(object: Event): void {
         let idDelElemento = (<HTMLElement>object.target).id;
@@ -40,6 +42,24 @@ class Main implements EventListenerObject {
             } else {
                 alert("El usuario o la contraseña son icorrectas");
             }
+        } else if (idDelElemento == 'btnPost') {
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = () => {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    console.log("se ejecuto el post", xmlHttp.responseText);
+                }
+            }
+           
+            xmlHttp.open("POST", "http://localhost:8000/usuario", true);
+            
+            xmlHttp.setRequestHeader("Content-Type", "application/json"); 
+            xmlHttp.setRequestHeader("otracosa", "algo"); 
+            
+
+            let json = {name: 'mramos' };
+            xmlHttp.send(JSON.stringify(json));
+
+
         }
         
     }

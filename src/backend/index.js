@@ -13,7 +13,36 @@ app.use(express.static('/home/node/app/static/'));
 
 //=======[ Main module code ]==================================================
 
+app.get('/usuario/:id',function(req,res){
+    console.log(req.params.id);
+    if(req.params.id>0){
+        res.status(200).send("{id:1,name:'mramos'}");
+    }else{
+        let mensaje = {mensaje:'El id no puede ser negativo'}
+        res.status(403).send(JSON.stringify(mensaje));
+    }
+})
+app.get('/usuario',function(req,res){
+
+    res.send("[{id:1,name:'mramos'},{id:2,name:'fperez'}]")
+});
+//Insert
+app.post('/usuario',function(req,res){
+    console.log(req.body.id);
+    if(req.body.id!=undefined && req.body.name!=undefined){
+        //inset en la tabla
+        res.send();
+    }else{
+        let mensaje = {mensaje:'El id o el name no estaban cargados'}
+        res.status(400).send(JSON.stringify(mensaje));
+    }
+    
+});
+
+
+
 app.get('/devices/', function(req, res, next) {
+    
     devices = [
         { 
             'id': 1, 
