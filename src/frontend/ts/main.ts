@@ -22,11 +22,11 @@ class Main implements EventListenerObject {
         } else if (idDelElemento === 'btnBuscar') {
             console.log("Buscando!")
             this.buscarDevices();
-        } else if (idDelElemento ==='btnLogin'){
+        } else if (idDelElemento === 'btnLogin') {
             console.log("login")
             let iUser = this.recuperarElemento("userName");
             let iPass = this.recuperarElemento("userPass");
-            let usuarioNombre:string = iUser.value;
+            let usuarioNombre: string = iUser.value;
             let usuarioPassword: string = iPass.value;
             
             if (usuarioNombre.length >= 4 && usuarioPassword.length >= 6) {
@@ -35,7 +35,7 @@ class Main implements EventListenerObject {
                 let checkbox = this.recuperarElemento("cbRecor");
                 
                 console.log(usuario, checkbox.checked);
-                iUser.disabled = true;  
+                iUser.disabled = true;
                 (<HTMLInputElement>object.target).disabled = true;
                 let divLogin = this.recuperarElemento("divLogin");
                 divLogin.hidden = true;
@@ -52,14 +52,30 @@ class Main implements EventListenerObject {
            
             xmlHttp.open("POST", "http://localhost:8000/usuario", true);
             
-            xmlHttp.setRequestHeader("Content-Type", "application/json"); 
-            xmlHttp.setRequestHeader("otracosa", "algo"); 
+            xmlHttp.setRequestHeader("Content-Type", "application/json");
+            xmlHttp.setRequestHeader("otracosa", "algo");
             
 
-            let json = {name: 'mramos' };
+            let json = { name: 'mramos' };
             xmlHttp.send(JSON.stringify(json));
 
 
+        } else {
+            let input = <HTMLInputElement>object.target;
+            alert(idDelElemento.substring(3) + ' - ' + input.checked);
+            let prenderJson = { id: input.getAttribute("idBd"), status: input.checked }
+            let xmlHttpPost = new XMLHttpRequest();
+            
+            xmlHttpPost.onreadystatechange = () => {
+                if (xmlHttpPost.readyState === 4 && xmlHttpPost.status === 200) {
+                    let json = JSON.parse(xmlHttpPost.responseText);
+                    alert(json.id);
+                }                
+            }
+
+            xmlHttpPost.open("POST", "http://localhost:8000/device", true);
+            xmlHttpPost.setRequestHeader("Content-Type","application/json")
+            xmlHttpPost.send(JSON.stringify(prenderJson));
         }
         
     }
@@ -74,7 +90,7 @@ class Main implements EventListenerObject {
                     let listaDevices: string = '';
                    
                     let lista: Array<Device> = JSON.parse(xmlHttp.responseText);
-        
+                    
                     for (let item of lista) {
                         listaDevices += `
                         <li class="collection-item avatar">
@@ -87,9 +103,9 @@ class Main implements EventListenerObject {
                               <label>
                                 Off`;
                         if (item.state) {
-                            listaDevices +='<input type="checkbox" checked>'
+                            listaDevices +=`<input idBd="${item.id}" id="cb_${item.id}" type="checkbox" checked>`
                         } else {
-                            listaDevices +='<input type="checkbox">'
+                            listaDevices +=`<input idBd="${item.id}"  name="chk" id="cb_${item.id}" type="checkbox">`
                         }
                         listaDevices += `      
                                 <span class="lever"></span>
@@ -102,6 +118,11 @@ class Main implements EventListenerObject {
                         
                     }
                     ul.innerHTML = listaDevices;
+                
+                    for (let item of lista) {
+                        let cb = this.recuperarElemento("cb_" + item.id);
+                        cb.addEventListener("click", this);
+                    }
                 } else {
                     alert("ERROR en la consulta");
                 }

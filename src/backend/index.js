@@ -13,14 +13,16 @@ app.use(express.static('/home/node/app/static/'));
 
 //=======[ Main module code ]==================================================
 
-app.get('/usuario/:id',function(req,res){
-    console.log(req.params.id);
-    if(req.params.id>0){
-        res.status(200).send("{id:1,name:'mramos'}");
-    }else{
-        let mensaje = {mensaje:'El id no puede ser negativo'}
-        res.status(403).send(JSON.stringify(mensaje));
-    }
+app.get('/device/:id',function(req,res){
+    utils.query("SELECT id,description FROM Devices where id="+req.params.id,(error,respuesta,fields)=>{
+        if(error){
+            res.status(409).send(error.sqlMessage);    
+        }else{
+            res.status(200).send(respuesta);
+        }
+        
+    })
+    
 })
 app.get('/usuario',function(req,res){
 
@@ -38,6 +40,20 @@ app.post('/usuario',function(req,res){
     }
     
 });
+
+app.post('/device/',function(req,res){
+    
+    utils.query("update Devices set state="+req.body.status +" where id="+req.body.id,
+        (err,resp,meta)=>{
+            if(err){
+                console.log(err.sqlMessage)
+                res.status(409).send(err.sqlMessage);
+            }else{
+                res.send("ok "+resp);
+            }
+    })
+    
+})
 
 
 

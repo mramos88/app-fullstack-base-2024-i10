@@ -9,3 +9,11 @@ main {
     flex: 1 0 auto;
 }
 
+.title{
+    color: brown;
+    font-weight: bold;
+    text-align: center;
+}
+.parafo{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
